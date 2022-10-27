@@ -1,0 +1,35 @@
+-- create database test;
+-- select database test.db;
+-- drop database test;
+-- create database cat;
+-- use cat;
+-- select database();
+-- create table MyCat(name varchar(100), age int);
+-- show tables;
+-- show columns from MyCat;
+-- above same can be refered using DESCRIBE or DESC 
+-- desc MyCat;
+-- drop table is used for delete hole table
+-- drop table MyCat ;
+-- create table pastries(name varchar(50), Qty int);
+-- show tables;
+-- drop table pastries;
+-- insert into Mycat(name, age)
+-- values('tom',2);
+-- insert into Mycat(name, age)
+-- values('tim',6);
+-- insert into Mycat(age, name)
+-- values(6,'jam');
+-- insert into Mycat(name, age)
+-- values('joy0',8),
+-- ('joy1',4),
+-- ('joy2',2);
+-- select * from MyCat;
+-- create table people(F_name varchar(20), L_name varchar(20), age int);
+--  insert into people(F_name , L_name , age)
+-- values('abc','xyz',20);
+-- insert into people(F_name , L_name , age)
+-- values('abc','xyz',20),('xyz','pqr',20),('pqr','abc',20);
+-- select * from people;
+
+
