@@ -1,0 +1,5 @@
+-- use cat;
+-- select database();
+-- select * from MyCat;
+-- insert into Mycat(name)
+-- values('tom1');
