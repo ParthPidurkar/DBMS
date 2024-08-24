@@ -1,0 +1,84 @@
+Unique key :-
+ create table ORDERS (OID varchar(10) unique, Amount decimal(10,2),Product_ID int , Customer_Phone BIGINT);
+
+mysql> INSERT INTO ORDERS VALUES(1,200.5,2,9090909011);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO ORDERS VALUES(2,500,2,9090909012);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from orders;
++------+--------+------------+----------------+
+| OID  | Amount | Product_ID | Customer_Phone |
++------+--------+------------+----------------+
+| 1    | 200.50 |          2 |     9090909011 |
+| 2    | 500.00 |          2 |     9090909012 |
++------+--------+------------+----------------+
+2 rows in set (0.00 sec)
+
+If we use same order is which is already inserted and also declared as Unique key this it will show error
+mysql> INSERT INTO ORDERS VALUES(2,500,2,909095642);
+ERROR 1062 (23000): Duplicate entry '2' for key 'orders.OID'
+
+
+
+Primary Key :-
+ mysql> CREATE TABLE ORDERS1 (OID VARCHAR(10) UNIQUE, AMOUNT DECIMAL(10,2), PROD_ID INT, CUST_PHONE BIGINT, CUST_ID INT, CONSTRAINT CCCDF_PK PRIMARY KEY ( PROD_ID, CUST_ID) );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from ORDERS1;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO ORDERS VALUES(1,200.5, 2,9090909011, 77);
+ERROR 1062 (23000): Duplicate entry '1' for key 'orders.OID'
+mysql> INSERT INTO ORDERS1 VALUES(1,200.5, 2,9090909011, 77);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from ORDERS1;
++------+--------+---------+------------+---------+
+| OID  | AMOUNT | PROD_ID | CUST_PHONE | CUST_ID |
++------+--------+---------+------------+---------+
+| 1    | 200.50 |       2 | 9090909011 |      77 |
++------+--------+---------+------------+---------+
+1 row in set (0.00 sec)
+
+
+
+Composite Key :-
+mysql> CREATE TABLE ORDERS2 (OID VARCHAR(10) UNIQUE, AMOUNT DECIMAL(10,2), PROD_ID INT, CUST_PHONE BIGINT, CUST_ID INT, PRIMARY KEY ( PROD_ID, CUST_ID),
+UNIQUE (PROD_ID, CUST_PHONE) );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_estore |
++------------------+
+| orders           |
+| orders2          |
++------------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO ORDERS2 VALUES(1,200.5, 2,9090909011, 77);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from ORDERS2;
++------+--------+---------+------------+---------+
+| OID  | AMOUNT | PROD_ID | CUST_PHONE | CUST_ID |
++------+--------+---------+------------+---------+
+| 1    | 200.50 |       2 | 9090909011 |      77 |
++------+--------+---------+------------+---------+
+1 row in set (0.00 sec)
+
+
+
+FOREIGN KEY :-
+CREATE TABLE ORDERS (OID VARCHAR(10) UNIQUE, AMOUNT DECIMAL(10,2), PROD_ID INT, CUST_PHONE BIGINT, CUST_ID INT, ADDR VARCHAR(80),
+PRIMARY KEY ( PROD_ID, CUST_ID),
+FOREIGN KEY (PROD_ID) REFERENCES eproducts( ProductID) 
+);
+
+INSERT INTO ORDERS VALUES(1,200.5, 2,9090909011, 77,’BANGALORE’);
+INSERT INTO ORDERS VALUES(2,500, 2,9090909012, 55,’DUBAI’);
+
+– Below insertion should FAIL since eproducts table does not have any product with product id 25.
+INSERT INTO ORDERS VALUES(2,500, 25, 9090909012, 55);
